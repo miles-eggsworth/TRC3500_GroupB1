@@ -32,7 +32,7 @@
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
 #define NUM_CHANNELS 2
-#define SAMPLE_SIZE 1000
+#define SAMPLE_SIZE 1500
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -163,6 +163,7 @@ int main(void)
 //  HAL_Delay(10000);
 
   // Process ADC data once DMA is complete
+  snprintf(msg, sizeof(msg), "Data capture ended\n");
   for (int i = 0; i < SAMPLE_SIZE; ++i) {
 	  ch0_data[i] = adcBuffer[i * NUM_CHANNELS + 0]; // Channel 0
 	  ch1_data[i] = adcBuffer[i * NUM_CHANNELS + 1]; // Channel 1
@@ -171,14 +172,14 @@ int main(void)
   //Send the data via UART
   snprintf(msg, sizeof(msg), "Channel 0 Data:\n");
   HAL_UART_Transmit(&huart2, (uint8_t*)msg, strlen(msg), HAL_MAX_DELAY);
-  for (int i = 0; i < SAMPLE_SIZE; ++i) {
+  for (int i = 0; i < SAMPLE_SIZE; i++) {
 	  snprintf(msg, sizeof(msg), "%u\n", adcBuffer[i * NUM_CHANNELS + 0]);
 	  HAL_UART_Transmit(&huart2, (uint8_t*)msg, strlen(msg), HAL_MAX_DELAY);
   }
 
   snprintf(msg, sizeof(msg), "Channel 1 Data:\n");
   HAL_UART_Transmit(&huart2, (uint8_t*)msg, strlen(msg), HAL_MAX_DELAY);
-  for (int i = 0; i < SAMPLE_SIZE; ++i) {
+  for (int i = 0; i < SAMPLE_SIZE; i++) {
 	  snprintf(msg, sizeof(msg), "%u\n", adcBuffer[i * NUM_CHANNELS + 1]);
 	  HAL_UART_Transmit(&huart2, (uint8_t*)msg, strlen(msg), HAL_MAX_DELAY);
   }
