@@ -32,7 +32,7 @@
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
 #define NUM_CHANNELS 2
-#define SAMPLE_SIZE 1500
+#define SAMPLE_SIZE 4500
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
